@@ -1,20 +1,30 @@
-require "leonid_palindrome/version"
+ require "leonid_palindrome/version"
 
-class String
+module LeonidPalindrome
 
   def palindrome?
-    processed_content == processed_content.reverse
+    if processed_content.empty?
+      false
+    else
+      processed_content == processed_content.reverse
+    end
+
   end
 
-  def letters
-  self.scan(/[a-z]/i).join.downcase
-  end
+
 
   private
     def processed_content
-      self.letters.downcase
+      self.to_s.scan(/[a-z0-9]/i).join.downcase
     end
 
+end
 
 
+class String
+  include LeonidPalindrome
+end
+
+class Integer
+  include LeonidPalindrome
 end
